@@ -25,3 +25,4 @@ springを導入しているので下記の手順で実行可能です。
 下記コマンドで静的解析を実行可能です。
 
 `docker-compose exec spring bundle exec rails_best_practices`
+
