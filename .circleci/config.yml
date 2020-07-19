@@ -260,7 +260,7 @@ workflows:
           env: production
           requires:
             - rubocop_job
-            - brakeman_job            - 
+            - brakeman_job
             - eslint_job
             - jest_job
             - rspec_job
