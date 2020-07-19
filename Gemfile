@@ -39,6 +39,8 @@ group :development, :test do
   gem 'pry-byebug'
   # コーディング規約
   gem 'rails_best_practices'
+  # CircleCIでテストするよう
+  gem 'rspec_junit_formatter'
 end
 
 group :development do
