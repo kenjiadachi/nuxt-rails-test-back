@@ -6,10 +6,39 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.6.3-stretch-node
+        environment:
+          - BUNDLER_VERSION: 2.0.2
+          - RAILS_ENV: 'test'
+      - image: circleci/9.6.9-alpine
     executor: ruby/default
     steps:
       - checkout
+
+      # bundle キャッシュをリストアする
+      - restore_cache:
+        keys:
+          - rails-demo-{{ checksum "Gemfile.lock" }}
+          - rails-demo-
+
+      # bundle install で依存関係をインストールする
       - run:
-          name: Which bundler?
-          command: bundle -v
-      - ruby/bundle-install
+          name: Install dependencies
+          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
+
+      - run: sudo apt install -y postgresql-client || true
+
+      # bundle キャッシュを保存する
+      - save_cache:
+          key: rails-demo-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      
+      - run:
+        name: Database Setup
+        command: |
+          bundle exec rake db:create
+          bundle exec ridgepole --config ./config/database.yml --file ./db/Schemafile --apply
+      
+      - run:
+        name: RSpec
+        command: bundle exec rspec
