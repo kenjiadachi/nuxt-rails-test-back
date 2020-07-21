@@ -33,3 +33,4 @@ AllCops:
     - vendor/**/*
     - config/environments/*
     - spec/spec_helper.rb
+  NewCops: enable
