@@ -1,0 +1,35 @@
+# 日本語でのコメントを許可
+Style/AsciiComments:
+  Enabled: false
+
+# 揃える位置について
+Layout/ArgumentAlignment:
+  Enabled: false
+
+# 原則bracketを使った%記法を使うように
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+# クラスにコメントを残さない
+Style/Documentation:
+  Enabled: false
+
+# 文字列のfreeze
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# ブロックの長さをMax30行まで
+Metrics/BlockLength:
+  Max: 30
+
+AllCops:
+  Exclude:
+    - tmp/**/*
+    - .pryrc
+    - Gemfile
+    - Rakefile
+    - bin/*
+    - db/schema.rb
+    - vendor/**/*
+    - config/environments/*
+    - spec/spec_helper.rb

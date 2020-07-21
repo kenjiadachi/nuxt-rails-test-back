@@ -41,6 +41,8 @@ group :development, :test do
   gem 'rails_best_practices'
   # CircleCIでテストするよう
   gem 'rspec_junit_formatter'
+  # 静的コード解析
+  gem 'rubocop'
 end
 
 group :development do
