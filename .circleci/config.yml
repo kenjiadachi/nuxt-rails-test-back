@@ -19,10 +19,7 @@ executors:
 commands:
   setup_database:
     steps:
-      # Database setup
       - run: mv ./config/database.yml.ci ./config/database.yml
-
-      # Database setup
       - run:
           name: Database setup
           command: |
@@ -77,3 +74,5 @@ workflows:
     jobs:
       - build
       - test
+          requires:
+            - build
