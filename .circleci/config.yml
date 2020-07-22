@@ -58,19 +58,19 @@ jobs:
       - attach_workspace:
           at: ~/app
       - restore_cache:
-        keys:
-          - gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          - gem-cache-{{ arch }}-{{ .Branch }}
-          - gem-cache
-    - run:
-        name: install dependencies
-        command: |
-          gem install bundler -v 2.0.2
-          bundle check --path=vendor/bundle || bundle install --path vendor/bundle --clean --jobs 4 --retry 3
-    - save_cache:
-        paths:
-          - ./vendor/bundle
-        key: gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          keys:
+            - gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gem-cache-{{ arch }}-{{ .Branch }}
+            - gem-cache
+      - run:
+          name: install dependencies
+          command: |
+            gem install bundler -v 2.0.2
+            bundle check --path=vendor/bundle || bundle install --path vendor/bundle --clean --jobs 4 --retry 3
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
       - run:
           name: Run rails best practice
           command: bundle exec rails_best_practices
