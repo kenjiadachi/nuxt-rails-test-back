@@ -54,6 +54,7 @@ jobs:
     executor:
       name: default
     steps:
+      - checkout
       - attach_workspace:
           at: ~/app
       - run:
