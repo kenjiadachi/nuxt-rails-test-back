@@ -34,22 +34,22 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            - v1-dependencies-
+            - gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gem-cache-{{ arch }}-{{ .Branch }}
+            - gem-cache
       - run:
           name: install dependencies
           command: |
             gem install bundler -v 2.0.2
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
+            bundle check --path=vendor/bundle || bundle install --path vendor/bundle --clean --jobs 4 --retry 3
       - save_cache:
           paths:
             - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          key: gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
       - setup_database
       - persist_to_workspace:
-          root: ~/app
-          paths:
-            - ~/app
+          root: .
+          paths: vendor/bundle
   test:
     executor:
       name: default
@@ -69,7 +69,7 @@ jobs:
               --format progress \
               --format RspecJunitFormatter
 workflows:
-  version: 2.1
+  version: 2
   build_and_test:
     jobs:
       - build
