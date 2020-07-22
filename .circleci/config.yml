@@ -19,7 +19,7 @@ executors:
 commands:
   setup_database:
     steps:
-      - run: mv ./config/database.yml.ci ./config/database.yml
+      - run: mv ./config/database.ci.yml ./config/database.yml
       - run:
           name: Database setup
           command: |
@@ -71,6 +71,7 @@ jobs:
           paths:
             - ./vendor/bundle
           key: gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+      - setup_database
       - run:
           name: Run rails best practice
           command: bundle exec rails_best_practices
