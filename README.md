@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/kenjiadachi/nuxt-rails-test-back/branch/master/graph/badge.svg)](https://codecov.io/gh/kenjiadachi/nuxt-rails-test-back)
+
 # README
 
 ## デバッグ方法
