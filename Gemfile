@@ -43,6 +43,8 @@ group :development, :test do
   gem 'rspec_junit_formatter'
   # 静的コード解析
   gem 'rubocop'
+  # testカバレッジ
+  gem 'codecov'
 end
 
 group :development do
