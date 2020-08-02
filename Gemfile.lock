@@ -234,6 +234,7 @@ DEPENDENCIES
   rspec-rails
   rspec_junit_formatter
   rubocop
+  simplecov
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
